@@ -1,0 +1,1 @@
+To create Movie-Store app with an authentication middlewares.
