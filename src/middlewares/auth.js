@@ -1,4 +1,5 @@
 const jwt = require("jsonwebtoken");
+const express = require('express');
 
 const config = process.env;
 
@@ -7,7 +8,7 @@ const verifyToken = (req, res, next) => {
     req.body.token || req.query.token || req.headers["x-access-token"];
 
   if (!token) {
-    return res.status(403).send("A token is required for authentication");
+    return res.status(401).send("A token is required for authentication");
   }
   try {
     const decoded = jwt.verify(token, config.TOKEN_KEY);
@@ -18,13 +19,17 @@ const verifyToken = (req, res, next) => {
   return next();
 };
 
+app.post("/welcome", auth, (req, res) => {
+  res.status(200).send("Welcome 🙌 ");
+});
+
 module.exports = verifyToken;
 
 
 
 
 
-const express = require('express');
+
 
 module.exports = (req, res, next) => {
   try {

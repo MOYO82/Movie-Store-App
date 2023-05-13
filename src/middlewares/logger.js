@@ -46,9 +46,9 @@ app.post("/register", async (req, res) => {
   } catch (err) {
     console.log(err);
   }
-  // Our register logic ends here
-});
 
+
+  // Our register logic ends here
 
 
 
@@ -65,6 +65,7 @@ exports.deleteThing = (req, res, next) => {
             error: new Error('Requête non autorisée !')
           });
         }
+
         Thing.deleteOne({_id: req.params.id}).then(
           () => {
             res.status(200).json({
@@ -78,6 +79,6 @@ exports.deleteThing = (req, res, next) => {
             });
           }
         );
-      }
-    );
-  };
+     });
+    }
+  })
