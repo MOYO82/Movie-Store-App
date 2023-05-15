@@ -1,4 +1,23 @@
 
+import {Router} from "express"
+import TaskController from "../controllers/taskController.js"
+import { tryCatchHandler} from "../utils/tryCatchHandler.js"
+import {userAuthMiddleWare} from "../middlewares/authMiddleware.js"
+
+const router = Router()
+
+router.post("/create", userAuthMiddleWare, tryCatchHandler( TaskController.createTask))
+
+router.put("/update", userAuthMiddleWare, tryCatchHandler( TaskController.updateOneTask))
+
+router.get("/one", userAuthMiddleWare, tryCatchHandler( TaskController.getOneTask))
+
+router.get("/all_task", userAuthMiddleWare, tryCatchHandler( TaskController.findAll))
+
+router.delete("/delete",  userAuthMiddleWare, tryCatchHandler( TaskController.deleteOneTask))
+
+export {router}
+
 app.post("/register", async (req, res) => {
 
     // Our register logic starts here

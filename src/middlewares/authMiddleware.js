@@ -1,6 +1,29 @@
-const jwt = require("jsonwebtoken");
-const express = require('express');
+import jwt from "jsonwebtoken";
+import { UnAuthorizedError} from "../error/error.js"
+import {verifyToken} from "../utils/jwtUtils.js"
 
+export function userAuthMiddleWare(req, res, next){
+  const token = req.headers?.authorizati(" ")[1];
+  if(!token) throw new UnAuthorizedError("You must provide an authorization token.")
+  try {
+    const payload = verifyToken(token)
+    req.user = payload
+    next()
+  }catch (err){
+    throw new UnAuthorizedError("Access denied, invalid token.")
+  }
+} 
+
+if (!token) return res.status(401).send('Access denied. No token provided.');
+
+try {
+  const decoded = jwt.verify(token, config.get('jwtPrivateKey'));
+  req.user = decoded; 
+  next();
+}
+catch (ex) {
+  res.status(400).send('Invalid token.');
+}
 const config = process.env;
 
 const verifyToken = (req, res, next) => {

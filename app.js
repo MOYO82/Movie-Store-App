@@ -1,11 +1,12 @@
 import express from 'express';
 import mongoose from 'mongoose';
+import dotenv from 'dotevn';
 import {userRouter} from './src/routes/user.router.js'
 import {taskRouter} from './src/routes/task.router.js'
-import auth from './src/middlewares/auth.js';
+import auth from './src/middlewares/authMiddleware.js';
 
 
-require("dotenv").config()
+dotenv.config()
 
 require("./config/database").connect();
 

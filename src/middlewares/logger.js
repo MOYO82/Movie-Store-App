@@ -57,12 +57,12 @@ exports.deleteThing = (req, res, next) => {
       (thing) => {
         if (!thing) {
           return res.status(404).json({
-            error: new Error('Objet non trouvé !')
+            error: new Error('Request not found!')
           });
         }
         if (thing.userId !== req.auth.userId) {
           return res.status(401).json({
-            error: new Error('Requête non autorisée !')
+            error: new Error('Request not authorize !')
           });
         }
 

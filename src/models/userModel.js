@@ -1,11 +1,10 @@
-const mongoose = require("mongoose");
+import { Schema, model }  from "mongoose";
 
 const userSchema = new mongoose.Schema({
   username: {
     type: String, 
     require: true, 
     unique: true,
-    lowercase: true,
     min: 7,
     max: 45,
   },
@@ -49,4 +48,8 @@ const userSchema = new mongoose.Schema({
   timestamps: true
 });
 
+UserSchema.pre("save", function(next){
+  this.fullName = this.firstName + " " +  this.lastName 
+  next()
+})
 module.exports = mongoose.model("user", userSchema);

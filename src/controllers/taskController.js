@@ -1,11 +1,11 @@
-import {createTaskValidator} from '../validators/taskValidator.js'
-import Task from '../model/taskModel.js'
-import User from '../model/userMmodel.js'
-import { BadUserRequestError } from '../error/error.js'
-// import { mongoIdValidator } from "../validators/mongoId.validator.js"
+import {createTaskValidator} from "../validators/taskValidator.js";
+import Task from "../models/taskModel.js";
+import User from "../models/userModel.js";
+import { BadUserRequestError } from "../error/error.js";
+import { mongoIdValidator } from "../validators/mongoIdValidator.js";
 
 export default class TaskController {
-  static async createTask(req, res,){
+  static async createTask(req, res){
       const {error } = createTaskValidator.validate(req.body)
       if(error) throw error
       const newUser = await Task.create(req.body)
@@ -18,7 +18,7 @@ export default class TaskController {
     })
   }
 
-  static async updateOneTask(req, res){
+  static async updateNewTask(req, res){
     const { id } = req.query
     const { error } = mongoIdValidator.validate(req.query)
     if( error ) throw new BadUserRequestError("Please pass in a valid mongoId")

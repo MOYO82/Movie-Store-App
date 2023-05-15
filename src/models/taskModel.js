@@ -1,4 +1,4 @@
-import mongoose from 'mongoose';
+import { Schema, model, Types, Query } from "mongoose";
 
 const movieSchema = mongoose.Schema({
     movieTitle : {
@@ -24,7 +24,16 @@ const movieSchema = mongoose.Schema({
         type: string,  
         required: true
     },
-    
+
+    releasedDate: {
+        type: Date,
+        required: true,
+      },
+    status: {
+        type: String,
+        enum: ["started", "in-progress", "completed"],
+    },
+
     timestamps : true
 })
 
